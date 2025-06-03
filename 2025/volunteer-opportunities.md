@@ -21,7 +21,25 @@ In short, all contributions are meaningful, but please 1) pick issues that match
 
 ## OSCAL Compass
 
-**Important Dates:** Kickoff will be the week of June 9th, 2025
+**Important Dates:** A kickoff meeting will happen at 11:30 AM ET on June 9th, 2025. Final commits and presentations around August 13th
+
+**Official Announcement:**
+---
+#### Contribute to the OSCAL Compass open source project
+
+Learn how to contribute to an open source project OSCAL Compass https://github.com/oscal-compass, which is hosted at the CNCF. OSCAL Compass enables the creation, validation, and governance of documentation artifacts for compliance needs. It leverages NIST's OSCAL (Open Security Controls Assessment Language) as a standard data format for interchange between tools and people.  To participate you should be willing to devote 4 hours a day for a week. You can work solo or in a team.
+
+- We'll kick off the activity on June 9 at 11:30 AM EDT and provide background and information on open issues.
+- By the end of the week you should have made at least a partial contribution with a deadline for the completion and Pull Request submission by **August 6** for those who plan to continue over the summer.
+- We will invite all participants (maximum 10) to deliver a lightning talk about their experience - around **August 13**.
+
+To participate:
+- Join slack channel `#oscal-compass-trestle-agileauthoring-c2p` in cloud-native.slack.com slack workspace
+- Enroll here / Join this meeting on June 9 at 11:30am Eastern https://zoom-lfx.platform.linuxfoundation.org/meeting/97147278133?password=e35886b1-5272-4bbd-a86d-eab04b80498c
+  - Note this link may ask you to log in with a Linux Foundation account. You can sign up for one with your GitHub username or Gmail account. 
+---
+
+**Time Requirements:** 4 hours a day for the first week, asynchronous in following weeks through August. 
 
 **GitHub Organization:** https://github.com/oscal-compass
 
