@@ -8,14 +8,12 @@ Students with the VSIP program have access to the ICE cluster, which has CPU and
 
 [Using Ollama + Jupyter in Open OnDemand](https://gatech.service-now.com/home?id=kb_article_view&sysparm_article=KB0044442) (requires GT login)
 
-> [!NOTE] How is using PACE different?
+> [!NOTE] 
 > PACE supports ollama endpoints via Slurm scheduled jobs rather than as a locally (laptop) or remotely hosted (Replicate) service. You can use the Open OnDemand (OOD) application on PACE ICE to schedule a Slurm job that then has access to a set of shared models, including the latest Granite 3 models.
 
 ### Setting up your PACE virtual environment
 
-The workshop highly suggests that you create a "clean" venv or virtual environment to run the workshop notebooks.
-
-Once you log in to PACE ICE, you can run the following from a terminal on the login node:
+The workshop highly suggests that you create a "clean" venv or virtual environment to run the workshop notebooks. Once you log in to PACE ICE, you can run the following from a terminal on the login node:
 
 ```
 [login-ice ~]$ module load python/3.12
@@ -28,10 +26,9 @@ $ source ~/granite_env/bin/activate
 ```
 
 ### Starting an Open OnDemand instance
-The easiest way to use Ollama with Jupyter notebooks is to use the [Open OnDemand instance for ICE](https://gatech.service-now.com/home?id=kb_article_view&sysparm_article=KB0042133) (Requires GT login for docs and OOD interface).
+The easiest way to use Ollama with Jupyter notebooks is to use the [Open OnDemand instance for ICE](https://gatech.service-now.com/home?id=kb_article_view&sysparm_article=KB0042133) (Requires GT login for docs and OOD interface). Once you log in to the OnDemand instance, you can select the following: `Interactive Applications->Ollama + Jupyter (Beta)`
 
-Once you log in, you can select the following: `Interactive Applications->Ollama + Jupyter (Beta)`
-
+---
 We recommend running with the following parameters:
 - Python environment: Custom virtual environment
     - Virtual environment path: `/home/hice1/<gburdell>/granite_venv`
@@ -43,8 +40,9 @@ We recommend running with the following parameters:
 - Total memory: <32 GB or 64 GB>
 - Time: <start with 1 hour and expand as needed>
 - Quality of service: `Default (none)`
+---
 
-> [!TIP] Where are the PACE shared models stored?
+> [!TIP] 
 > ICE uses the OLLAMA_MODELS environment variable to point to a shared storage location for models
 
 ### Changes to notebooks on ICE
