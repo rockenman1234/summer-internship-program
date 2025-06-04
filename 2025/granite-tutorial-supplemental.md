@@ -33,17 +33,29 @@ We recommend running with the following parameters:
 
 ## Running locally
 
-The Granite workshop recommends running on a laptop with at least 32 GB of memory. 
+The Granite workshop recommends running on a laptop with at least 32 GB of memory and possibly a GPU. 
 
 ## Possible local errors
 
-**Note:** most of these errors are tested with MacOS
+**Note:** most of these errors were experienced on MacOS.
 
 ### Python version does not match the expected Python 3.10-3.13
 
-```
-Create a Python environment with an explicit version of Python and then name it "granite_venv"
+If you get an error when running the Granite notebooks about the Python version, you can try the following:
+
+1) Create a Python environment with an explicit version of Python. Here we name it "granite_venv"
 ```
 python3.10 -m venv --upgrade-deps --clear venv granite_venv
 source granite_venv/bin/activate
+python -m pip install --require-virtualenv notebook ipywidgets
+#Then start jupyter from this venv to use this version of Python
 ```
+
+2) Make sure you don't have other copies of Jupyter notebook or lab installed that use other versions of Python
+
+```
+brew list | grep jupyter
+brew remove jupyter
+```
+
+
