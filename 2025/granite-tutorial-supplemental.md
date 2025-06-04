@@ -1,4 +1,6 @@
+# Granite Tutorial Supplement
 
+This page covers some added resources to run and work with the open source IBM Granite Workshop models.
 
 ## Running on PACE ICE
 
