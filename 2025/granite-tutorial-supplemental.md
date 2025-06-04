@@ -18,11 +18,19 @@ The workshop highly suggests that you create a "clean" venv or virtual environme
 ```
 [login-ice ~]$ module load python/3.12
 # Note we've named our venv "granite_venv" here but you can name it whatever you like!
-$ python -m venv --upgrade-deps --clear venv granite_env
+[login-ice ~]$ python -m venv --upgrade-deps --clear venv granite_env
 # Source the environment to use it on your terminal
-$ source ~/granite_env/bin/activate
+[login-ice ~]$ source ~/granite_env/bin/activate
 # Make sure this venv has jupyter installed to use with the PACE OOD environment
 (granite_env) [login-ice ~]$ python -m pip install --require-virtualenv notebook jupyter ipywidgets
+```
+
+### Clone the Granite workshop repo
+
+While you're in the terminal, Git clone the Granite workshop repo in a desired location.  When you start your Jupyter session, you will then use the Jupyter file browser to navigate to `granite-workshop/notebooks`
+
+```
+[login-ice ~]$ git clone https://github.com/IBM/granite-workshop.git
 ```
 
 ### Starting an Open OnDemand instance
@@ -31,9 +39,9 @@ The easiest way to use Ollama with Jupyter notebooks is to use the [Open OnDeman
 ---
 We recommend running with the following parameters:
 - Python environment: Custom virtual environment
-    - Virtual environment path: `/home/hice1/<gburdell>/granite_venv`
+    - Virtual environment path: Wherever you created your virtual environment (see above).  In our example, we used `/home/hice1/<gburdell>/granite_venv`
 - Ollama models directory: `PACE Shared Models`
-- Jupyter interface: `Jupyter Notebook`
+- Jupyter interface: Whichever you prefer
 - Node type: <Choose 1 of "NVIDIA L40s", "NVIDIA GPU H100 (HGX)", or "NVIDIA GPU (first avail)">
 - Number of CPUs (cores): `4`
 - Number of GPUs: `1`
@@ -42,26 +50,21 @@ We recommend running with the following parameters:
 - Quality of service: `Default (none)`
 ---
 
-> [!TIP] 
-> ICE uses the OLLAMA_MODELS environment variable to point to a shared storage location for models
 
 ### Changes to notebooks on ICE
 
-The Granite workshop materials already check for a "local" ollama instance or for Replicate, and the existing tutorials use common variables like OLLAMA_HOST and OLLAMA_MODELS to point to the local Ollama instance and models directory. 
+We've discovered we need to change how the notebooks starts an Ollama session.  The approach that works on ICE is simpler than the original notebook.
 
-The main change we need to make for our notebook is to point to the correct shared models directory.
-
-From the [Summarize example notebook](https://ibm.github.io/granite-workshop/lab-1/):
-```
+In the original [Summarize example notebook](https://ibm.github.io/granite-workshop/lab-1/), the session is started in this cell. 
+ 
+```Python
 import os
 import requests
 from langchain_ollama.llms import OllamaLLM
 from langchain_community.llms import Replicate
 from ibm_granite_community.notebook_utils import get_env_var
 
-#model_path = "ibm-granite/granite-3.3-8b-instruct"
-## Replace model path with pointer to shared model
-model_path = <TBD>
+model_path = "ibm-granite/granite-3.3-8b-instruct"
 try: # Look for a locally accessible Ollama server for the model
     response = requests.get(os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434"))
     model = OllamaLLM(
@@ -69,9 +72,40 @@ try: # Look for a locally accessible Ollama server for the model
         num_ctx=65536, # 64K context window
     )
     model = model.bind(raw=True) # Client side controls prompt
+except Exception: # Use Replicate for the model
+    model = Replicate(
+        model=model_path,
+        replicate_api_token=get_env_var('REPLICATE_API_TOKEN'),
+        model_kwargs={
+            "max_tokens": 2000, # Set the maximum number of tokens to generate as output.
+            "min_tokens": 200, # Set the minimum number of tokens to generate as output.
+            "temperature": 0.75,
+            "presence_penalty": 0,
+            "frequency_penalty": 0,
+        },
+    )
 ```
 
-> [!TIP] To print out all the available models for Ollama you can run the following:
+**However, we can replace the entire cell with this** and proceed with the rest of the notebook.
+
+```Python
+import os
+from langchain_ollama.llms import OllamaLLM
+
+model_path = "ibm-granite/granite-3.3-8b-instruct"
+model = OllamaLLM(
+    model="granite3.3:8b",
+    num_ctx=65536, # 64K context window
+)
+model = model.bind(raw=True) # Client side controls prompt
+```
+
+> [!TIP] 
+> ICE uses the OLLAMA_MODELS environment variable to point to a shared storage location for models
+
+> [!TIP] 
+> To print out all the available models for Ollama you can run the following:
+
 ```
 import ollama
 for m in ollama.list().models:
