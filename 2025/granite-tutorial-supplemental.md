@@ -1,6 +1,6 @@
 # Granite Tutorial Supplement (BETA)
 
-This page covers some added resources to run and work with the open source IBM Granite Workshop material [see workshop material here](https://ibm.github.io/granite-workshop).
+This page covers some added resources to run and work with the open source [IBM Granite Workshop material](https://ibm.github.io/granite-workshop).
 
 ## Running on PACE ICE
 
