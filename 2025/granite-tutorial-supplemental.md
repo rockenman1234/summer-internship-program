@@ -101,9 +101,6 @@ model = model.bind(raw=True) # Client side controls prompt
 ```
 
 > [!TIP] 
-> ICE uses the OLLAMA_MODELS environment variable to point to a shared storage location for models
-
-> [!TIP] 
 > To print out all the available models for Ollama you can run the following:
 
 ```
